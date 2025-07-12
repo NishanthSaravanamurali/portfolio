@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nishanth | Data Analyst Intern</title>
+  <style>
+    :root {
+      --bg-light: #f8fafc;
+      --bg-dark: #0f172a;
+      --text-light: #1e293b;
+      --text-dark: #f1f5f9;
+      --accent: #1e3a8a ;
+      --accent-hover: #06b6d4 ;
+      --card-light: rgba(255, 255, 255, 0.9);
+      --card-dark: rgba(30, 41, 59, 0.9);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      color: var(--text-light);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('background.jpg'), linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1;
+    }
+
+    .dark-mode {
+      color: var(--text-dark);
+    }
+
+    .dark-mode::before {
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>'), 
+              linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--card-light);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin: 2rem auto;
+      max-width: 800px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: slideDown 0.8s ease-out;
+    }
+
+    .dark-mode header {
+      background: var(--card-dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent), #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      opacity: 0.8;
+      font-weight: 300;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      border: none;
+      border-radius: 50%;
+      background: var(--card-light);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode .toggle-btn {
+      background: var(--card-dark);
+    }
+
+    .toggle-btn:hover {
+      transform: scale(1.1);
+    }
+
+    nav {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1rem;
+    }
+
+    nav button {
+      margin: 0.5rem;
+      padding: 1rem 2rem;
+      border: none;
+      background: var(--card-light);
+      backdrop-filter: blur(10px);
+      color: var(--text-light);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-mode nav button {
+      background: var(--card-dark);
+      color: var(--text-dark);
+    }
+
+    nav button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    nav button.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    .content-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      display: none;
+      padding: 3rem 2rem;
+      background: var(--card-light);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin: 2rem 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 0.6s ease-in;
+    }
+
+    .dark-mode section {
+      background: var(--card-dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--accent);
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: rgba(16, 137, 185, 0.1);
+      margin: 1rem 0;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    li:hover {
+      transform: translateX(10px);
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    .project-item {
+      background: rgba(59, 130, 246, 0.1);
+      border-left-color: #3b82f6;
+    }
+
+    .project-item:hover {
+      background: rgba(59, 130, 246, 0.2);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #3b82f6);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(16, 160, 185, 0.4);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(16, 160, 185, 0.4);
+      color: white;
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      background: rgba(16, 137, 185, 0.1);
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      background: rgba(16, 137, 185, 0.2);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--card-light);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .dark-mode footer {
+      background: var(--card-dark);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      header p {
+        font-size: 1.2rem;
+      }
+      
+      nav button {
+        margin: 0.3rem;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+      }
+      
+      section {
+        padding: 2rem 1rem;
+        margin: 1rem 0;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .toggle-btn {
+        width: 50px;
+        height: 50px;
+        top: 1rem;
+        right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="toggle-btn" onclick="toggleMode()">🌓</button>
+
+    <header>
+      <h1>Nishanth Saravanamurali</h1>
+      <p>Data Analyst Intern @ Providence, Hyderabad    <br>
+      B.Tech AI Student • Amrita Vishwa Vidyapeetham • CGPA: 8.94</p>
+    </header>
+
+    <nav>
+      <button class="active" onclick="showSection('about')">About</button>
+      <button onclick="showSection('skills')">Skills</button>
+      <button onclick="showSection('projects')">Projects</button>
+      <button onclick="showSection('resume')">Resume</button>
+      <button onclick="showSection('contact')">Contact</button>
+    </nav>
+
+    <div class="content-wrapper">
+      <section id="about" class="active">
+        <h2>About Me</h2>
+        <p>I'm a passionate Data Analyst Intern at Providence, currently diving deep into real-world data challenges. I enjoy working on analytics, data visualization, and uncovering actionable insights that drive business decisions.</p>
+        <p>My journey in data analytics combines technical expertise with creative problem-solving, allowing me to transform complex datasets into compelling narratives and strategic recommendations.</p>
+      </section>
+
+      <section id="skills">
+        <h2>Technical Skills</h2>
+        <ul>
+          <li><strong>Programming Languages:</strong> Python (Pandas, NumPy, Matplotlib, Seaborn)</li>
+          <li><strong>Database Management:</strong> SQL (MySQL, PostgreSQL)</li>
+          <li><strong>Data Visualization:</strong> Tableau, Power BI, Excel</li>
+          <li><strong>Analytics Tools:</strong> Google Sheets, Google Analytics</li>
+          <li><strong>Machine Learning:</strong> Scikit-learn, Basic ML Algorithms</li>
+          <li><strong>Statistical Analysis:</strong> Hypothesis Testing, Regression Analysis</li>
+        </ul>
+      </section>
+
+      <section id="projects">
+        <h2>Featured Projects</h2>
+        <ul>
+            <li class="project-item">
+            <strong>Academia Recommendation System using SVT and BPR</strong> | Python
+            <br>Built a recommendation system using movies dataset from Kaggle, implementing SVT and BPR methods for matrix completion and dimension reduction to provide accurate movie recommendations.
+            <br><a href="https://github.com/NishanthSaravanamurali" target="_blank" rel="noopener">View on GitHub →</a>
+            </li>
+            <li class="project-item">
+            <strong>Coral - Educational Chatbot</strong> | Python
+            <br>Developed an intelligent Python chatbot using Cohere API that learns from PDF documents and answers questions based on the content. Implemented both memory and memory-less versions to demonstrate information storage capabilities.
+            <br><a href="https://github.com/NishanthSaravanamurali" target="_blank"rel="noopener">View on GitHub →</a>
+            </li>
+            <li class="project-item">
+            <strong>Cycle Management System</strong> | Java
+            <br>Designed and implemented a bicycle-sharing demo application using Java for improved campus mobility. Integrated real-time tracking features and collaborated with a team of 4 to develop modules for cycle tracking and designated parking management.
+            <br><a href="https://github.com/NishanthSaravanamurali" target="_blank" rel="noopener">View on GitHub →</a>
+            </li>
+            <li class="project-item">
+            <strong>Python Music Player</strong> | Python
+            <br>Implemented a Python GUI application for playing locally stored music files. Used linked-lists for storing songs in different playlists as a demonstration for Data Structures and Algorithms concepts.
+            <br><a href="https://github.com/NishanthSaravanamurali" target="_blank"rel="noopener">View on GitHub →</a>
+            </li>
+            <li class="project-item">
+            <strong>Medchain: Federated Learning Healthcare System</strong> | Python <em>(Ongoing)</em>
+            <br>Currently developing a federated learning-based healthcare system that enables secure and privacy-preserving machine learning across distributed medical data sources.
+            <br><a href="https://github.com/NishanthSaravanamurali" target="_blank" rel="noopener">View on GitHub →</a>
+            </li>
+            <li class="project-item">
+            <strong>Fine Tune BERT for Text Classification</strong> | TensorFlow
+            <br>Completed advanced project on fine-tuning BERT models for text classification tasks using TensorFlow, demonstrating expertise in natural language processing and deep learning.
+            <br><a href="https://coursera.org" target="_blank" rel="noopener">View Certificate →</a>
+            </li>
+        </ul>
+        </section>
+
+      <section id="resume">
+        <h2>Resume</h2>
+        <p>Download my complete resume to learn more about my experience, education, and achievements in data analytics.</p>
+        <a href="Resume_old.pdf" class="download-btn" download>📄 Download Resume (PDF)</a>
+      </section>
+
+      <section id="contact">
+        <h2>Get In Touch</h2>
+        <p>I'm always open to discussing AI/ML opportunities, collaborations, or just connecting with fellow tech enthusiasts!</p>
+        <div class="contact-info">
+            <div class="contact-item">
+            <h3>📧 Email</h3>
+            <a href="mailto:nishanthsaravanamurali2004@gmail.com">nishanths2004@outlook.com</a>
+            </div>
+            <div class="contact-item">
+            <h3>💼 LinkedIn</h3>
+            <a href="https://linkedin.com/in/nishanth-saravanamurali/" target="_blank" rel="noopener">Connect with me</a>
+            </div>
+            <div class="contact-item">
+            <h3>🐙 GitHub</h3>
+            <a href="https://github.com/NishanthSaravanamurali" target="_blank" rel="noopener">View my repositories</a>
+            </div>
+            <div class="contact-item">
+            <h3>💻 LeetCode</h3>
+            <a href="https://leetcode.com" target="_blank" rel="noopener">100+ Problems Solved</a>
+            </div>
+        </div>
+        </section>
+    </div>
+
+    <footer>
+      &copy; 2025 Nishanth Saravanamurali | Data Analytics Portfolio
+    </footer>
+  </div>
+
+  <script>
+    function showSection(id) {
+      // Remove active class from all sections and buttons
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      
+      // Add active class to selected section and button
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle('dark-mode');
+      
+      // Save preference to localStorage
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDarkMode);
+    }
+
+    // Load saved theme preference
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('darkMode');
+      if (savedTheme === 'true') {
+        document.body.classList.add('dark-mode');
+      }
+    });
+
+    // Add smooth scrolling and enhanced interactions
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
